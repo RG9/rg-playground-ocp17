@@ -17,6 +17,16 @@ class Chapter7_Enums {
          int getNumberOfMonths() { return 0; }
      }
      
+     enum EnumWithPublicConstructor {
+      ONE(1), TWO("two")
+      //; // error: ',', '}', or ';' expected - be aware that semicolon is required when enum have methods and constructors
+      ;
+      // public EnumWithPublicConstructor(int val){ } // compilation error: modifier public not allowed here
+        EnumWithPublicConstructor(int val){ System.out.println(val); }  // constructor is implicitly private
+        private EnumWithPublicConstructor(Object val){ System.out.println(val);  }
+      }
+     
+     
      public static void main(String[] args) throws Exception {
        System.out.println("enum value of");
        System.out.println(Seasons.valueOf("SPRING")); // prints SPRING
@@ -29,6 +39,8 @@ class Chapter7_Enums {
           case WINTER -> { System.out.println("winter!"); } 
           default -> { System.out.println("other season"); }
        }
+       
+       EnumWithPublicConstructor.TWO.ordinal(); // I need to first use enum in order to execute code in constructors
 
     }
 }
